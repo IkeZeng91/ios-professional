@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C469AC332970D2D7004F5CF4 /* OnboardingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469AC322970D2D7004F5CF4 /* OnboardingContainerViewController.swift */; };
+		C469AC3529710347004F5CF4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469AC3429710347004F5CF4 /* OnboardingViewController.swift */; };
 		C4CC91D2296BB84600D908CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CC91D1296BB84600D908CD /* AppDelegate.swift */; };
 		C4CC91D6296BB84600D908CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CC91D5296BB84600D908CD /* LoginViewController.swift */; };
 		C4CC91DB296BB84800D908CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CC91DA296BB84800D908CD /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		C469AC322970D2D7004F5CF4 /* OnboardingContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerViewController.swift; sourceTree = "<group>"; };
+		C469AC3429710347004F5CF4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C4CC91CE296BB84600D908CD /* Bankey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bankey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CC91D1296BB84600D908CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4CC91D5296BB84600D908CD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +43,7 @@
 			isa = PBXGroup;
 			children = (
 				C469AC322970D2D7004F5CF4 /* OnboardingContainerViewController.swift */,
+				C469AC3429710347004F5CF4 /* OnboardingViewController.swift */,
 			);
 			name = "On Boarding";
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			files = (
 				C4CC91E8296BD33900D908CD /* LoginView.swift in Sources */,
 				C4CC91D6296BB84600D908CD /* LoginViewController.swift in Sources */,
+				C469AC3529710347004F5CF4 /* OnboardingViewController.swift in Sources */,
 				C4CC91D2296BB84600D908CD /* AppDelegate.swift in Sources */,
 				C469AC332970D2D7004F5CF4 /* OnboardingContainerViewController.swift in Sources */,
 			);
