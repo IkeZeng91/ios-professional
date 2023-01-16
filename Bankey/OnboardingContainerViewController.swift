@@ -7,17 +7,26 @@
 
 import UIKit
 
+protocol OnboardingContainerViewControllerDelegate: AnyObject {
+    func didFinishOnboarding()
+}
+
 class OnboardingContainerViewController: UIViewController {
 
     let pageViewController: UIPageViewController
-    var pages = [UIViewController]()
-    var currentVC: UIViewController {
-        didSet {
-        }
-    }
+    var pages = [UIViewController]() //一开始为空，我们在初始化的时候把三个page各自的vc append进去
+    var currentVC: UIViewController
+    let closeButton = UIButton(type: .system)
+    let previousButton = UIButton(type: .system)
+    let nextButton = UIButton(type: .system)
+
+
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    weak var delegate: OnboardingContainerViewControllerDelegate?
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) { //这是一个standard init method on a view controller.
+        
+        self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil) //在这里我们实例化pageViewController
         
         let page1 = OnboardingViewController(heroImageName: "delorean", titleText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in the 80s.")
         let page2 = OnboardingViewController(heroImageName: "world", titleText: "Move your money around the world quickly and securely.")
@@ -40,8 +49,17 @@ class OnboardingContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
+        style()
+        layout()
+        
+      
+    }
+    
+    private func setup(){
         view.backgroundColor = .systemPurple
         
+        //如何把子view controller加到父view controller的三步
         //This is how we add child view controllers to a parent view controller.we do use this technique when we want to embed child view controllers in a parent view controller
         addChild(pageViewController) //add child on the page view controller
         view.addSubview(pageViewController.view) //take that child's view and we add it as a sub view to our view.
@@ -60,6 +78,48 @@ class OnboardingContainerViewController: UIViewController {
         pageViewController.setViewControllers([pages.first!], direction: .forward, animated: false, completion: nil)
         currentVC = pages.first!
     }
+    
+    private func style(){
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.setTitle("Close", for: [])
+        closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        
+        view.addSubview(closeButton)
+        
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.setTitle("Next", for: [])
+        nextButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        
+        view.addSubview(nextButton)
+        
+        previousButton.translatesAutoresizingMaskIntoConstraints = false
+        previousButton.setTitle("Previous", for: [])
+        previousButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        
+        view.addSubview(previousButton)
+    }
+    
+    private func layout(){
+        //close button
+        NSLayoutConstraint.activate([
+            closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)
+        ])
+        
+        //next button
+        NSLayoutConstraint.activate([
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: nextButton.bottomAnchor, multiplier: 4)
+        ])
+        
+        //previous button
+        NSLayoutConstraint.activate([
+            previousButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.bottomAnchor.constraint(equalToSystemSpacingBelow: previousButton.bottomAnchor, multiplier: 4)
+        ])
+        
+    }
+    
 }
 
 // MARK: - UIPageViewControllerDataSource
@@ -68,7 +128,7 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return getPreviousViewController(from: viewController)
     }
-
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         return getNextViewController(from: viewController)
     }
@@ -94,4 +154,21 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
     }
 }
 
+
+// MARK: Actions
+
+extension OnboardingContainerViewController{
+    @objc func closeTapped(_ sender: UIButton){
+        close()
+    }
+    
+    private func close(){
+        delegate?.didFinishOnboarding()
+    }
+    
+
+}
+
+    
+    
 

@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class OnboardingViewController: UIViewController{
     let stackView = UIStackView()
     let imageView = UIImageView()
@@ -14,7 +16,7 @@ class OnboardingViewController: UIViewController{
     
     let heroImageName: String
     let titleText: String
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
