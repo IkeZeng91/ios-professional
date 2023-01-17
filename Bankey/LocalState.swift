@@ -18,7 +18,7 @@ public class LocalState {
             return UserDefaults.standard.bool(forKey: Keys.hasOnboarded.rawValue)
         } set(newValue) {
             UserDefaults.standard.set(newValue, forKey: Keys.hasOnboarded.rawValue)
-            UserDefaults.standard.synchronize()
+//            UserDefaults.standard.synchronize() ios12后不在需要
         }
     }
 }
